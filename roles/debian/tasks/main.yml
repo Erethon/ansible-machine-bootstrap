@@ -1,0 +1,10 @@
+---
+
+- apt:
+    name: "{{ item }}"
+    update_cache: yes
+    install_recommends: no
+  with_items: packages
+  tags:
+    - packages
+  when: ansible_os_family == "Debian"

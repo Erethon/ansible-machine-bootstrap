@@ -1,0 +1,71 @@
+---
+
+- user:
+    name: "{{ username }}"
+    shell: /bin/bash
+  tags:
+    - users
+
+- authorized_key:
+    user: "{{ username }}"
+    key: "{{ item }}"
+  with_file:
+    - public_keys/key.pub
+  tags:
+    - users
+
+- git:
+    repo: "{{ dotfiles }}"
+    dest: "/home/{{ username }}/Code/dotfiles"
+  tags:
+    - users
+
+- shell: ./setup.sh
+  sudo: yes
+  sudo_user: "{{ username }}"
+  args:
+    chdir: "/home/{{ username }}/dotfiles"
+  tags:
+    - users
+
+- template:
+    src: ferm.j2
+    dest: /etc/ferm/ferm.conf
+    owner: root
+    group: adm
+    mode: 0644
+    backup: yes
+  tags:
+    - config
+  notify:
+    - restart ferm
+
+- lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+  with_items:
+    - { regexp: "PasswordAuthentication", line: "PasswordAuthentication no" }
+    - { regexp: "^Port ", line: "Port {{ ssh_port }}" }
+  notify:
+    - restart ssh
+  tags:
+    - config
+
+- lineinfile:
+    dest: /etc/sudoers
+    line: "Defaults        env_keep += HOME"
+    state: present
+    validate: "/usr/sbin/visudo -cf %s"
+  tags:
+    - users
+
+- template:
+    src: sudoers.d.j2
+    dest: "/etc/sudoers.d/{{ username }}"
+    mode: 0440
+    owner: root
+    group: root
+    validate: "/usr/sbin/visudo -cf %s"
+  tags:
+    - users
