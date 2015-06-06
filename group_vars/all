@@ -8,3 +8,9 @@ dotfiles: 'https://github.com/erethon/dotfiles.git'
 username: username
 
 ssh_port: 22
+
+monit_mail_server: mail.mailserver
+
+monit_mail_port: 587
+
+monit_alert_mail: your@email

@@ -5,3 +5,6 @@
 
 - name: restart ssh
   service: name=ssh state=restarted
+
+- name: restart monit
+  service: name=monit state=restarted

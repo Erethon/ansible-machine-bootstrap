@@ -69,3 +69,26 @@
     validate: "/usr/sbin/visudo -cf %s"
   tags:
     - users
+
+- lineinfile:
+    dest: /etc/monit/monitrc
+    backup: yes
+    line: "{{ item.line }}"
+  with_items:
+    - { line: "set alert {{ monit_alert_mail }}" }
+    - { line: "set mailserver {{ monit_mail_server }} port {{ monit_mail_port }}" }
+  notify:
+    - restart monit
+  tags:
+    - monit
+
+- template:
+    src: ssh.monit.j2
+    dest: "/etc/monit/conf.d/ssh"
+    mode: 0600
+    owner: root
+    group: root
+  notify:
+    - restart monit
+  tags:
+    - monit
