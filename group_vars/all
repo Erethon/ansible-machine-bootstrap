@@ -14,3 +14,5 @@ monit_mail_server: mail.mailserver
 monit_mail_port: 587
 
 monit_alert_mail: your@email
+
+monit_fs_percentage: 50

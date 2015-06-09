@@ -83,11 +83,14 @@
     - monit
 
 - template:
-    src: ssh.monit.j2
-    dest: "/etc/monit/conf.d/ssh"
+    src: "{{ item.name }}"
+    dest: "/etc/monit/conf.d/{{ item.dest }}"
     mode: 0600
     owner: root
     group: root
+  with_items:
+    - { name: "fs.monit.j2", dest: "fs" }
+    - { name: "ssh.monit.j2", dest: "ssh" }
   notify:
     - restart monit
   tags:
