@@ -1,7 +1,8 @@
 packages: ['git', 'vim', 'rxvt-unicode-256color', 'screen', 'tmux', 'lsof',
            'fail2ban', 'mlocate', 'htop', 'sudo', 'ferm', 'strace', 'ltrace',
            'file', 'monit', 'less', 'nmon', 'bwm-ng', 'colordiff', 'mtr-tiny',
-           'bash-completion', 'netcat', 'telnet', 'ca-certificates', 'curl']
+           'bash-completion', 'netcat', 'telnet', 'ca-certificates', 'curl',
+           'debian-goodies', 'sysstat']
 
 dotfiles: 'https://github.com/erethon/dotfiles.git'
 
