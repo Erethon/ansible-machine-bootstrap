@@ -98,3 +98,12 @@
     - restart monit
   tags:
     - monit
+
+- lineinfile:
+    dest: /etc/aliases
+    backup: yes
+    line: "root: {{ monit_alert_mail }}"
+  notify:
+    - update alises
+  tags:
+    - users
