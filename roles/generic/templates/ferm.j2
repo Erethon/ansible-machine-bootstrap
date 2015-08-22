@@ -49,7 +49,7 @@ domain ip6 table filter {
 
     # outgoing connections are not limited
     chain OUTPUT {
-        policy DROP;
+        policy ACCEPT;
 
         # connection tracking
         mod state state (ESTABLISHED RELATED) ACCEPT;
