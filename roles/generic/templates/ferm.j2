@@ -61,3 +61,5 @@ domain ip6 table filter {
     # DROP everything
     chain FORWARD policy DROP;
 }
+
+@include 'manual.d/';
