@@ -3,6 +3,7 @@
 - user:
     name: "{{ username }}"
     shell: /bin/bash
+    password: "{{ user_password }}"
   tags:
     - users
 
