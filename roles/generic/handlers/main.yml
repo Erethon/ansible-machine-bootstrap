@@ -2,6 +2,7 @@
 
 - name: restart ferm
   service: name=ferm state=restarted
+  notify: restart fail2ban
 
 - name: restart ssh
   service: name=ssh state=restarted
@@ -11,3 +12,6 @@
 
 - name: update aliases
   command: newaliases
+
+- name: restart fail2ban
+  service: name=fail2ban state=restarted
