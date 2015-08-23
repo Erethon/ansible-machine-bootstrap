@@ -100,11 +100,18 @@
   tags:
     - monit
 
+- file:
+    path: /etc/aliases
+    state: touch
+    owner: root
+    group: root
+    mode: 0644
+
 - lineinfile:
     dest: /etc/aliases
     backup: yes
     line: "root: {{ monit_alert_mail }}"
   notify:
-    - update alises
+    - update aliases
   tags:
     - users
