@@ -32,6 +32,15 @@
   tags:
     - users
 
+- file:
+    path: /etc/ferm/manual.d
+    owner: root
+    group: adm
+    state: directory
+    mode: 0644
+  tags:
+    - config
+
 - template:
     src: ferm.j2
     dest: /etc/ferm/ferm.conf
@@ -106,6 +115,8 @@
     owner: root
     group: root
     mode: 0644
+  tags:
+    - users
 
 - lineinfile:
     dest: /etc/aliases
