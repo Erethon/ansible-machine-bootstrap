@@ -29,7 +29,11 @@ table filter {
         mod state state (ESTABLISHED RELATED) ACCEPT;
     }
 
-    chain FORWARD policy DROP;
+    chain FORWARD {
+        policy DROP;
+        mod state state INVALID DROP;
+        mod state state (ESTABLISHED RELATED) ACCEPT;
+    }
 }
 
 domain ip6 table filter {
