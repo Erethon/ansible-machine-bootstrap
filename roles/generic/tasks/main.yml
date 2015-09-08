@@ -65,6 +65,17 @@
   tags:
     - config
 
+- ini_file:
+    dest: /etc/fail2ban/jail.conf
+    section: ssh
+    option: port
+    value: "{{ ssh_port }}"
+    backup: yes
+  notify:
+    - restart fail2ban
+  tags:
+    - config
+
 - lineinfile:
     dest: /etc/sudoers
     line: "Defaults        env_keep += HOME"
