@@ -1,0 +1,22 @@
+---
+
+- lineinfile:
+    dest: /etc/apt/sources.list
+    line: "deb http://ftp.gr.debian.org/debian/ jessie-backports main"
+
+- apt:
+    name: "docker.io"
+    update_cache: yes
+    install_recommends: no
+
+- lineinfile:
+    dest: /etc/default/docker
+    line: 'DOCKER_OPTS="--iptables=false"'
+  notify: restart ferm
+
+- copy:
+    src: ../files/docker.ferm
+    dest: /etc/ferm/manual.d/docker.ferm
+    owner: root
+    group: root
+    mode: 0644

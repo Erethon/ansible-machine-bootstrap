@@ -1,6 +1,10 @@
 ---
 
-- hosts: all
+- hosts: All
   roles:
   - debian
   - generic
+
+- hosts: docker
+  roles:
+  - docker

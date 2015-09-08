@@ -1,0 +1,11 @@
+table filter {
+    chain FORWARD {
+        interface docker0 outerface eth0 saddr 172.16/12 ACCEPT;
+    }
+}
+
+table nat {
+    chain POSTROUTING {
+        outerface eth0 saddr 172.16/12 MASQUERADE;
+    }
+}
