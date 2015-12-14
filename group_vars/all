@@ -10,6 +10,8 @@ username: username
 
 user_password: password_for_the_new_user_in_crypt_form
 
+shell: /bin/zsh
+
 ssh_port: 22
 
 monit_mail_server: mail.mailserver
